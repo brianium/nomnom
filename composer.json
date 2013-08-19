@@ -1,0 +1,17 @@
+{
+    "name": "brianium/nomnom",
+    "description": "Simple file size conversion",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Brian Scaturro",
+            "email": "scaturrob@gmail.com"
+        }
+    ],
+    "require": {
+
+    },
+    "require-dev": {
+        "phpunit/phpunit":"3.7.*"
+    }
+}
