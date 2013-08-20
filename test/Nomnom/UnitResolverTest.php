@@ -20,8 +20,8 @@ class UnitResolverTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Nomnom\PrefixNotFoundException
-     * @expectedExceptionMessage Prefix "XiB" not found
+     * @expectedException \Nomnom\UnitNotFoundException
+     * @expectedExceptionMessage Unit "XiB" not found
      */
     public function test_unknown_binary_throws_exception()
     {
@@ -29,8 +29,8 @@ class UnitResolverTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Nomnom\PrefixNotFoundException
-     * @expectedExceptionMessage Prefix "XB" not found
+     * @expectedException \Nomnom\UnitNotFoundException
+     * @expectedExceptionMessage Unit "XB" not found
      */
     public function test_unknown_metric_throws_exception()
     {

@@ -46,7 +46,7 @@ class UnitResolver
      * Lookup the exponent based on prefix
      *
      * @param $key
-     * @throws PrefixNotFoundException
+     * @throws UnitNotFoundException
      * @return int
      */
     public static function resolve($key)
@@ -56,6 +56,6 @@ class UnitResolver
         if (preg_match(static::IEC_PATTERN, $key))
             $dict = static::$binary;
         if (array_key_exists($key, $dict)) return $dict[$key];
-        throw new PrefixNotFoundException(sprintf('Prefix "%s" not found', $key));
+        throw new UnitNotFoundException(sprintf('Unit "%s" not found', $key));
     }
 }
