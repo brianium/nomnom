@@ -8,7 +8,7 @@ class UnitResolver
      *
      * @var string
      */
-    private static $iec = '/[A-Z]iB/';
+    const IEC_PATTERN = '/[A-Z]iB/';
 
     /**
      * Binary lookup table
@@ -53,7 +53,7 @@ class UnitResolver
     {
         if ($key == 'B') return 0;
         $dict = static::$metric;
-        if (preg_match(static::$iec, $key))
+        if (preg_match(static::IEC_PATTERN, $key))
             $dict = static::$binary;
         if (array_key_exists($key, $dict)) return $dict[$key];
         throw new PrefixNotFoundException(sprintf('Prefix "%s" not found', $key));
