@@ -37,7 +37,7 @@ class UnitResolver
      * @var array
      */
     private static $metric = array(
-        'KB' => 1,
+        'kB' => 1,
         'MB' => 2,
         'GB' => 3,
         'TB' => 4,

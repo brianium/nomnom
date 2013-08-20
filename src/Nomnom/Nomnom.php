@@ -4,6 +4,27 @@ namespace Nomnom;
 class Nomnom 
 {
     /**
+     * Metric and Binary constants
+     */
+    const BYTES = 'B';
+    const kB = 'kB';
+    const MB = 'MB';
+    const GB = 'GB';
+    const TB = 'TB';
+    const PB = 'PB';
+    const EB = 'EB';
+    const ZB = 'ZB';
+    const YB = 'YB';
+    const KiB = 'KiB';
+    const MiB = 'MiB';
+    const GiB = 'GiB';
+    const TiB = 'TiB';
+    const PiB = 'PiB';
+    const EiB = 'EiB';
+    const ZiB = 'ZiB';
+    const YiB = 'YiB';
+
+    /**
      * The number to convert
      *
      * @var float|int
