@@ -44,4 +44,11 @@ class NomnomTest extends \PHPUnit_Framework_TestCase
         $tb = $nomnom->from('MiB')->to('TiB');
         $this->assertEquals(0.0009765625, $tb);
     }
+
+    public function test_from_B_to_metric_sets_base_to_10()
+    {
+        $nomnom = new Nomnom(1000);
+        $nomnom->from('B')->to('MB');
+        $this->assertEquals(10, $nomnom->getBase());
+    }
 }

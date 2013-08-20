@@ -4,11 +4,18 @@ namespace Nomnom;
 class Nomnom 
 {
     /**
-     * The conversion base
+     * The number to convert
+     *
+     * @var float|int
+     */
+    private $start = 0;
+
+    /**
+     * Which base to convert from/to
      *
      * @var float
      */
-    private $base = 0;
+    private $base = 2;
 
     /**
      * @var int
@@ -18,11 +25,11 @@ class Nomnom
     /**
      * Construct
      *
-     * @param float $base
+     * @param float $start
      */
-    public function __construct($base)
+    public function __construct($start)
     {
-        $this->base = $base;
+        $this->start = $start;
     }
 
     /**
@@ -39,9 +46,15 @@ class Nomnom
     {
         $fromBase = UnitResolver::resolve($this->from);
         $toBase = UnitResolver::resolve($unit);
+        $this->setBase($unit);
         if ($toBase > $fromBase)
-            return $this->div($this->base, pow(1024, $toBase - $fromBase), $precision);
-        return $this->mul($this->base, pow(1024, $fromBase - $toBase), $precision);
+            return $this->div($this->start, pow(1024, $toBase - $fromBase), $precision);
+        return $this->mul($this->start, pow(1024, $fromBase - $toBase), $precision);
+    }
+
+    public function getBase()
+    {
+        return $this->base;
     }
 
     protected function div($left, $right, $precision)
@@ -54,5 +67,14 @@ class Nomnom
     {
         if (is_null($precision)) return $left * $right;
         return bcmul($left, $right, $precision);
+    }
+
+    /**
+     * @param $unit
+     */
+    protected function setBase($unit)
+    {
+        if ($this->from == 'B' && !preg_match(UnitResolver::IEC_PATTERN, $unit))
+            $this->base = 10;
     }
 }
