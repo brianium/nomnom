@@ -1,22 +1,22 @@
 <?php
 namespace Nomnom;
 
-class ExponentResolverTest extends \PHPUnit_Framework_TestCase
+class UnitResolverTest extends \PHPUnit_Framework_TestCase
 {
     public function test_resolve_resolves_IEC_prefix_to_exponent()
     {
-        $exp = ExponentResolver::resolve('GiB');
+        $exp = UnitResolver::resolve('GiB');
         $this->assertEquals(3, $exp);
     }
 
     public function test_resolve_with_B_returns_0()
     {
-        $this->assertEquals(0, ExponentResolver::resolve('B'));
+        $this->assertEquals(0, UnitResolver::resolve('B'));
     }
 
     public function test_resolve_resolves_metric_prefix()
     {
-        $this->assertEquals(8, ExponentResolver::resolve('YB'));
+        $this->assertEquals(8, UnitResolver::resolve('YB'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ExponentResolverTest extends \PHPUnit_Framework_TestCase
      */
     public function test_unknown_binary_throws_exception()
     {
-        ExponentResolver::resolve("XiB");
+        UnitResolver::resolve("XiB");
     }
 
     /**
@@ -34,6 +34,6 @@ class ExponentResolverTest extends \PHPUnit_Framework_TestCase
      */
     public function test_unknown_metric_throws_exception()
     {
-        ExponentResolver::resolve("XB");
+        UnitResolver::resolve("XB");
     }
 }

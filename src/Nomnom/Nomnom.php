@@ -37,8 +37,8 @@ class Nomnom
 
     public function to($unit, $precision = null)
     {
-        $fromBase = ExponentResolver::resolve($this->from);
-        $toBase = ExponentResolver::resolve($unit);
+        $fromBase = UnitResolver::resolve($this->from);
+        $toBase = UnitResolver::resolve($unit);
         if ($toBase > $fromBase)
             return $this->div($this->base, pow(1024, $toBase - $fromBase), $precision);
         return $this->mul($this->base, pow(1024, $fromBase - $toBase), $precision);

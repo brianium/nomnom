@@ -1,7 +1,7 @@
 <?php
 namespace Nomnom;
 
-class ExponentResolver 
+class UnitResolver
 {
     /**
      * Pattern to check if is IEC standard prefix
