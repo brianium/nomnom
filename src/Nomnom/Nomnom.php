@@ -34,7 +34,7 @@ class Nomnom
     /**
      * Which base to convert from/to
      *
-     * @var float
+     * @var int
      */
     private $base = 2;
 
@@ -66,10 +66,12 @@ class Nomnom
     }
 
     /**
-     * The unit to convert to
+     * The unit to convert to. Accepts an optional
+     * precision for how many significant digits to
+     * hang on to
      *
      * @param $unit
-     * @param null $precision
+     * @param int|null $precision
      * @return float|string
      */
     public function to($unit, $precision = null)
@@ -77,6 +79,7 @@ class Nomnom
         $fromBase = UnitResolver::resolve($this->from);
         $toBase = UnitResolver::resolve($unit);
         $this->setBase($unit);
+        //some funky stuff with negative exponents and pow
         if ($toBase > $fromBase)
             return $this->div($this->start, pow(1024, $toBase - $fromBase), $precision);
         return $this->mul($this->start, pow(1024, $fromBase - $toBase), $precision);
@@ -90,6 +93,17 @@ class Nomnom
     public function getBase()
     {
         return $this->base;
+    }
+
+    /**
+     * Return a new Nomnom
+     *
+     * @param $start
+     * @return \Nomnom\Nomnom
+     */
+    public static function nom($start)
+    {
+        return new Nomnom($start);
     }
 
     /**
