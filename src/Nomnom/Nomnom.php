@@ -33,6 +33,8 @@ class Nomnom
     }
 
     /**
+     * The unit to convert from
+     *
      * @param string $unit
      * @return $this
      */
@@ -42,6 +44,13 @@ class Nomnom
         return $this;
     }
 
+    /**
+     * The unit to convert to
+     *
+     * @param $unit
+     * @param null $precision
+     * @return float|string
+     */
     public function to($unit, $precision = null)
     {
         $fromBase = UnitResolver::resolve($this->from);
@@ -52,17 +61,40 @@ class Nomnom
         return $this->mul($this->start, pow(1024, $fromBase - $toBase), $precision);
     }
 
+    /**
+     * Returns the number base being used by Nomnom
+     *
+     * @return int
+     */
     public function getBase()
     {
         return $this->base;
     }
 
+    /**
+     * Use bcdiv if precision is specified
+     * otherwise use native division operator
+     *
+     * @param $left
+     * @param $right
+     * @param $precision
+     * @return float|string
+     */
     protected function div($left, $right, $precision)
     {
         if (is_null($precision)) return $left / $right;
         return bcdiv($left, $right, $precision);
     }
 
+    /**
+     * Use bcmul if precision is specified
+     * otherwise use native multiplication operator
+     *
+     * @param $left
+     * @param $right
+     * @param $precision
+     * @return string
+     */
     protected function mul($left, $right, $precision)
     {
         if (is_null($precision)) return $left * $right;
@@ -71,10 +103,13 @@ class Nomnom
 
     /**
      * @param $unit
+     * @throws ConversionException
      */
     protected function setBase($unit)
     {
         if ($this->from == 'B' && !preg_match(UnitResolver::IEC_PATTERN, $unit))
             $this->base = 10;
+        if (UnitResolver::unitsAreDifferent($this->from, $unit))
+            throw new ConversionException("Cannot convert between metric and binary formats");
     }
 }

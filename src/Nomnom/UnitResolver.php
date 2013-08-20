@@ -4,11 +4,16 @@ namespace Nomnom;
 class UnitResolver
 {
     /**
-     * Pattern to check if is IEC standard prefix
+     * Pattern to check if is IEC standard unit
      *
      * @var string
      */
     const IEC_PATTERN = '/[A-Z]iB/';
+
+    /**
+     * Pattern to check if is SI standard unit
+     */
+    const SI_PATTERN = '/[A-Zk]B/';
 
     /**
      * Binary lookup table
@@ -57,5 +62,21 @@ class UnitResolver
             $dict = static::$binary;
         if (array_key_exists($key, $dict)) return $dict[$key];
         throw new UnitNotFoundException(sprintf('Unit "%s" not found', $key));
+    }
+
+
+    /**
+     * Check if two units are in the same
+     * family
+     *
+     * @param string $first
+     * @param string $second
+     * @return bool
+     */
+    public static function unitsAreDifferent($first, $second)
+    {
+        return
+            (preg_match(UnitResolver::SI_PATTERN, $first) && preg_match(UnitResolver::IEC_PATTERN, $second)) ||
+            (preg_match(UnitResolver::IEC_PATTERN, $first) && preg_match(UnitResolver::SI_PATTERN, $second));
     }
 }

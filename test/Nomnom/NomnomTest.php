@@ -51,4 +51,24 @@ class NomnomTest extends \PHPUnit_Framework_TestCase
         $nomnom->from('B')->to('MB');
         $this->assertEquals(10, $nomnom->getBase());
     }
+
+    /**
+     * @expectedException \Nomnom\ConversionException
+     * @expectedExceptionMessage Cannot convert between metric and binary formats
+     */
+    public function test_from_MiB_to_GB_throws_ConversionException()
+    {
+        $nomnom = new Nomnom(1024);
+        $nomnom->from('MiB')->to('GB');
+    }
+
+    /**
+     * @expectedException \Nomnom\ConversionException
+     * @expectedExceptionMessage Cannot convert between metric and binary formats
+     */
+    public function test_from_GB_MiB_throws_ConversionException()
+    {
+        $nomnom = new Nomnom(1024);
+        $nomnom->from('GB')->to('MiB');
+    }
 }
