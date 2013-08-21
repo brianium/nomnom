@@ -1,6 +1,7 @@
 {
     "name": "brianium/nomnom",
-    "description": "Simple file size conversion",
+    "description": "Simple file size conversion for PHP 5.3+",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -9,12 +10,13 @@
         }
     ],
     "require": {
-
+        "ext-bcmath": "*"
     },
     "require-dev": {
         "phpunit/phpunit":"3.7.*"
     },
     "autoload": {
         "psr-0": { "Nomnom": ["src/"] }
-    }
+    },
+    "keywords": ["filesize", "conversion"]
 }
