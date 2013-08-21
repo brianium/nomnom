@@ -41,6 +41,8 @@ Notes
 Nomnom will throw a `ConversionException` if the `from` and `to` methods contain units
 for different bases, i.e no `$nomnom->from('KiB')->to('MB');`
 
+Nomnom requires the bcmath extension to handle greater precision.
+
 Tests
 -----
 To run the tests, make sure dependencies have been installed with `composer install --dev` and run:
