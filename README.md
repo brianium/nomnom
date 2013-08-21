@@ -1,5 +1,4 @@
-Nomnom
-======
+#Nomnom [![Build Status](https://travis-ci.org/brianium/nomnom.png?branch=master)](https://travis-ci.org/brianium/nomnom)
 > Get it? Bytes? Bites?
 
 Nomnom handles file size conversion for PHP 5.3+. It handles both binary (base 2)
