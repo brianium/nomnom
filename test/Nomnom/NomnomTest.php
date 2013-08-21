@@ -78,6 +78,12 @@ class NomnomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1.4, $mib);
     }
 
+    public function test_Nomnomnom_bytes_to_MB()
+    {
+        $mb = Nomnom::nom(1440000)->from(Nomnom::BYTES)->to(Nomnom::MB, 2);
+        $this->assertEquals(1.44, $mb);
+    }
+
     public function test_Nomnomnom_MiB_to_GiB()
     {
         $gib = Nomnom::nom(4096)->from(Nomnom::MiB)->to(Nomnom::GiB);

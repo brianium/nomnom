@@ -66,23 +66,24 @@ class Nomnom
     }
 
     /**
-     * The unit to convert to. Accepts an optional
-     * precision for how many significant digits to
-     * hang on to
+     * Convert the start value to the given unit.
+     * Accepts an optional precision for how many significant digits to
+     * retain
      *
      * @param $unit
      * @param int|null $precision
-     * @return float|string
+     * @return float
      */
     public function to($unit, $precision = null)
     {
-        $fromBase = UnitResolver::resolve($this->from);
-        $toBase = UnitResolver::resolve($unit);
+        $fromUnit = UnitResolver::resolve($this->from);
+        $toUnit = UnitResolver::resolve($unit);
         $this->setBase($unit);
+        $base = $this->getBase() == 2 ? 1024 : 1000;
         //some funky stuff with negative exponents and pow
-        if ($toBase > $fromBase)
-            return $this->div($this->start, pow(1024, $toBase - $fromBase), $precision);
-        return $this->mul($this->start, pow(1024, $fromBase - $toBase), $precision);
+        if ($toUnit > $fromUnit)
+            return $this->div($this->start, pow($base, $toUnit - $fromUnit), $precision);
+        return $this->mul($this->start, pow($base, $fromUnit - $toUnit), $precision);
     }
 
     /**
@@ -113,12 +114,12 @@ class Nomnom
      * @param $left
      * @param $right
      * @param $precision
-     * @return float|string
+     * @return float
      */
     protected function div($left, $right, $precision)
     {
         if (is_null($precision)) return $left / $right;
-        return bcdiv($left, $right, $precision);
+        return floatval(bcdiv($left, $right, $precision));
     }
 
     /**
@@ -128,12 +129,12 @@ class Nomnom
      * @param $left
      * @param $right
      * @param $precision
-     * @return string
+     * @return float
      */
     protected function mul($left, $right, $precision)
     {
         if (is_null($precision)) return $left * $right;
-        return bcmul($left, $right, $precision);
+        return floatval(bcmul($left, $right, $precision));
     }
 
     /**
