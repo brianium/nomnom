@@ -4,7 +4,7 @@ Nomnom
 
 Nomnom handles file size conversion for PHP 5.3+. It handles both binary (base 2)
 and metric (base 10) conversions. It provides a simple interface for converting between
-sizes of any type!
+sizes of any similar base!
 
 Usage
 -----
@@ -24,7 +24,7 @@ $mb = $nomnom->from('B')->to('MB', 2);
 $nomnom = new Nomnom(1024);
 
 //binary conversion to 1
-$kb = $nomnom->from('kB')->to('MiB');
+$kb = $nomnom->from('KiB')->to('MiB');
 ```
 
 As a convenience, Nomnom provides a factory method called `nom` and constants for the metric
@@ -33,4 +33,19 @@ and binary units.
 ```php
 //returns 1.44
 Nomnom::nom(1440000)->from(Nomnom::BYTES)->to(Nomnom::MB, 2);
+```
+
+Notes
+-----
+'B' refers to bytes in either base 10 or base 2.
+
+Nomnom will throw a `ConversionException` if the `from` and `to` methods contain units
+for different bases, i.e no `$nomnom->from('KiB')->to('MB');`
+
+Tests
+-----
+To run the tests, make sure dependencies have been installed with `composer install --dev` and run:
+
+```bash
+vendor/bin/phpunit test/
 ```
