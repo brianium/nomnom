@@ -95,4 +95,10 @@ class NomnomTest extends \PHPUnit_Framework_TestCase
         $pib = Nomnom::nom(4096)->from(Nomnom::MiB)->to(Nomnom::PiB, 6);
         $this->assertEquals($pib, 0.000003);
     }
+
+    public function test_Nomnomnom_MB_to_GB()
+    {
+        $gb = Nomnom::nom(10000)->from(Nomnom::MB)->to(Nomnom::GB);
+        $this->assertEquals(10, $gb);
+    }
 }

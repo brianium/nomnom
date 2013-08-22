@@ -143,9 +143,24 @@ class Nomnom
      */
     protected function setBase($unit)
     {
-        if ($this->from == 'B' && !preg_match(UnitResolver::IEC_PATTERN, $unit))
+        if ($this->shouldSetBaseTen($unit))
             $this->base = 10;
         if (UnitResolver::unitsAreDifferent($this->from, $unit))
             throw new ConversionException("Cannot convert between metric and binary formats");
+    }
+
+    /**
+     * Match from against the unit to see if
+     * the base should be set to 10
+     *
+     * @param $unit
+     * @return bool
+     */
+    protected function shouldSetBaseTen($unit)
+    {
+        $unitMatchesIec = preg_match(UnitResolver::IEC_PATTERN, $unit);
+        return
+            ($this->from == 'B' && !$unitMatchesIec) ||
+            (preg_match(UnitResolver::SI_PATTERN, $this->from) && !$unitMatchesIec);
     }
 }
