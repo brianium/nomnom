@@ -72,6 +72,13 @@ class NomnomTest extends \PHPUnit_Framework_TestCase
         $nomnom->from('GB')->to('MiB');
     }
 
+    public function test_from_bytes_toBest_converts_to_highest_whole_value()
+    {
+        $nomnom = new Nomnom(1509949);
+        $megs = $nomnom->from('B')->toBest(2);
+        $this->assertEquals(1.43, $megs);
+    }
+
     public function test_Nomnomnom_bytes_to_MiB()
     {
         $mib = Nomnom::nom(1509949)->from(Nomnom::BYTES)->to(Nomnom::MiB, 1);

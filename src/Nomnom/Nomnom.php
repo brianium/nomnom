@@ -86,6 +86,20 @@ class Nomnom
         return $this->mul($this->start, pow($base, $fromUnit - $toUnit), $precision);
     }
 
+    public function toBest($precision = null)
+    {
+        $fromUnit = UnitResolver::resolve($this->from);
+        $base = $this->getBase() == 2 ? 1024 : 1000;
+        $converted = $this->start;
+        while ($converted >= 1) {
+            $fromUnit++;
+            $result = $this->div($this->start, pow($base, $fromUnit), $precision);
+            if ($result <= 1) return $converted;
+            $converted = $result;
+        }
+        return $converted;
+    }
+
     /**
      * Returns the number base being used by Nomnom
      *
