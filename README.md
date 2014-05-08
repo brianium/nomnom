@@ -24,6 +24,10 @@ $nomnom = new Nomnom(1024);
 
 //binary conversion to 1
 $kb = $nomnom->from('KiB')->to('MiB');
+
+//convert a file size
+$filesize = new Filesize('/path/to/file.txt');
+$mb = $filesize->to('MB');
 ```
 
 As a convenience, Nomnom provides a factory method called `nom` and constants for the metric
@@ -32,6 +36,9 @@ and binary units.
 ```php
 //returns 1.44
 Nomnom::nom(1440000)->from(Nomnom::BYTES)->to(Nomnom::MB, 2);
+
+//factory for Filesize
+Nomnom::file('/path/to/file.txt')->to(Nomnom::MB);
 ```
 
 Notes
