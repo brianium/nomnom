@@ -86,6 +86,14 @@ class Nomnom
         return $this->mul($this->start, pow($base, $fromUnit - $toUnit), $precision);
     }
 
+    /**
+     * Convert the start value to it's highest whole unit.
+     * Accespts an optional precision for how many significant digits
+     * to retain
+     *
+     * @param int|null $precision
+     * @return float
+     */
     public function toBest($precision = null)
     {
         $fromUnit = UnitResolver::resolve($this->from);
@@ -119,6 +127,17 @@ class Nomnom
     public static function nom($start)
     {
         return new Nomnom($start);
+    }
+
+    /**
+     * Return a new Filesize
+     *
+     * @param $file
+     * @return \Nomnom\Filesize
+     */
+    public static function file($file)
+    {
+        return new Filesize($file);
     }
 
     /**

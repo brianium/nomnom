@@ -108,4 +108,11 @@ class NomnomTest extends \PHPUnit_Framework_TestCase
         $gb = Nomnom::nom(10000)->from(Nomnom::MB)->to(Nomnom::GB);
         $this->assertEquals(10, $gb);
     }
+
+    public function test_Nomnom_file_to_KiB()
+    {
+        $file = FIXTURES . DS . 'book.txt';
+        $kib = Nomnom::file($file)->to(Nomnom::KiB);
+        $this->assertEquals(360, floor($kib));
+    }
 }
