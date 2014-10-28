@@ -152,7 +152,7 @@ class Nomnom
     protected function div($left, $right, $precision)
     {
         if (is_null($precision)) return $left / $right;
-        return floatval(bcdiv($left, $right, $precision));
+        return floatval(\bcdiv($left, $right, $precision));
     }
 
     /**
@@ -167,7 +167,7 @@ class Nomnom
     protected function mul($left, $right, $precision)
     {
         if (is_null($precision)) return $left * $right;
-        return floatval(bcmul($left, $right, $precision));
+        return floatval(\bcmul($left, $right, $precision));
     }
 
     /**
